@@ -1,40 +1,36 @@
 class Bottles
   def verse(number)
-    "#{bottle_number(number)} of beer on the wall, " +
-    verse_ending(number)
+    "#{bottle_number(number).capitalize} #{pluralize_bottles(number)} of beer on the wall, " +
+    "#{bottle_number(number)} #{pluralize_bottles(number)} of beer.\n" +
+    penultimate_line(number) +
+    last_line(number)
   end
 
   def verses(num1, num2)
-    num1.downto(num2).map { |n|
-      verse(n)
-    }.join("\n")
+    num1.downto(num2).map { |n| verse(n) }.join("\n")
   end
 
   def song()
+    verses(99, 0)
   end
 
-  def verse_ending(number)
-    case number
-    when 2
-      "#{bottle_number(number)} of beer.\n" +
-      "Take #{pronouns(number)} down and pass it around, " +
-      "#{number - 1} bottle of beer on the wall.\n"
-    when 1
-      "#{bottle_number(number)} of beer.\n" +
-      "Take #{pronouns(number)} down and pass it around, " +
-      "no more bottles of beer on the wall.\n"
-    when 0
-      "no more bottles of beer.\n" +
-      "Go to the store and buy some more, " +
-      "99 bottles of beer on the wall.\n"
+  def penultimate_line(number)
+    if number == 0
+      "Go to the store and buy some more, " 
     else
-      "#{bottle_number(number)} of beer.\n" +
-      "Take #{pronouns(number)} down and pass it around, " +
-      "#{number - 1} bottles of beer on the wall.\n"
+      "Take #{it_or_one(number)} down and pass it around, " 
+    end  
+  end
+
+  def last_line(number)
+    if number == 0
+      "99 #{pluralize_bottles(number - 1)} of beer on the wall.\n"
+    else
+      "#{bottle_number(number - 1)} #{pluralize_bottles(number - 1)} of beer on the wall.\n"
     end
   end
 
-  def pronouns(number)
+  def it_or_one(number)
     if number == 1
       "it"
     else
@@ -42,14 +38,19 @@ class Bottles
     end
   end
 
-  def bottle_number(number)
-    case number
-    when 1
-      "#{number} bottle"
-    when 0
-      "No more bottles"
+  def pluralize_bottles(number)
+    if number == 1
+      "bottle"
     else
-      "#{number} bottles"
+      "bottles"
+    end
+  end
+
+  def bottle_number(number)
+    if number == 0
+      "no more"
+    else
+      number.to_s
     end
   end
 end
