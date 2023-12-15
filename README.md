@@ -21,3 +21,7 @@ http://docs.railsbridge.org/installfest/macintosh
 
 Ubuntu: http://docs.railsbridge.org/installfest/linux
 https://www.ruby-lang.org/en/installation/
+
+## Running tests
+Use for following command to run the test suite:
+`ruby test/bottles_test.rb`

@@ -1,7 +1,7 @@
 class Bottles
   def verse(number)
-    "#{bottle_number(number).capitalize} #{pluralize_bottles(number)} of beer on the wall, " +
-    "#{bottle_number(number)} #{pluralize_bottles(number)} of beer.\n" +
+    "#{bottle_number(number).capitalize} #{beverage_container(number)} of beer on the wall, " +
+    "#{bottle_number(number)} #{beverage_container(number)} of beer.\n" +
     penultimate_line(number) +
     last_line(number)
   end
@@ -24,9 +24,9 @@ class Bottles
 
   def last_line(number)
     if number == 0
-      "99 #{pluralize_bottles(number - 1)} of beer on the wall.\n"
+      "99 #{beverage_container(number - 1)} of beer on the wall.\n"
     else
-      "#{bottle_number(number - 1)} #{pluralize_bottles(number - 1)} of beer on the wall.\n"
+      "#{bottle_number(number - 1)} #{beverage_container(number - 1)} of beer on the wall.\n"
     end
   end
 
@@ -38,9 +38,11 @@ class Bottles
     end
   end
 
-  def pluralize_bottles(number)
+  def beverage_container(number)
     if number == 1
       "bottle"
+    elsif number == 6
+      "six-pack"
     else
       "bottles"
     end
@@ -49,6 +51,8 @@ class Bottles
   def bottle_number(number)
     if number == 0
       "no more"
+    elsif number == 6
+      "1"
     else
       number.to_s
     end
